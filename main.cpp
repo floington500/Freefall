@@ -2,7 +2,6 @@
 #include <iomanip>
 #include <thread>
 #include <cmath>
-#include <stdlib.h>
 #include <string>
 
 const double GRAVITY = 9.8;
@@ -14,7 +13,8 @@ const double GRAVITY = 9.8;
  * @param a  acceleration
  * @param s  the distance
  */
-inline double velocityForm(double Iv, double a, double s)
+inline 
+double velocityForm(double Iv, double a, double s)
 {
 	return std::sqrt(std::pow(Iv, 2) + 2 * a * s);
 }
@@ -31,21 +31,17 @@ void printColumn(int n)
 /**
  * Prepares the terminal enviornment for the simulation.
  */
-void setup(int dist)
+void setup()
 {
 	system("clear");				   // clear the console
 	std::cout.setf(std::ios::unitbuf); // turn off stdout buffer
 	std::cout.sync_with_stdio(false);
 	std::cout << "\033[?25l"; // disable cursor blinking
-	// print the column
-	printColumn(dist);
-	// move cursor to starting point
-	std::cout << "\033[0;0H";
 }
 
 // usage:
 // 	- '--help'
-// 	- vertical_accleration rows
+// 	- accleration rows
 int main(int argc, char **argv)
 {
 	if (argv[1] == "--help")
@@ -53,16 +49,22 @@ int main(int argc, char **argv)
 		std::cout << "Usage: freefall <distance> <time>" << std::endl;
 		return 0;
 	}
-	int distance = std::stoi(argv[1]);
+	setup();
+	int dist = std::stoi(argv[1]);
 	double time = std::stoi(argv[2]);
-	setup(distance);
+		
+	// print the column
+	printColumn(dist);
+	// move cursor to starting point
+	std::cout << "\033[0;0H";
+
 	sleep(1);
 
 	// calculate initial velocity
-	double v = velocityForm(0, GRAVITY, distance);
+	double v = velocityForm(0, GRAVITY, dist);
 
 	// increases loop at interval of one
-	for (int pos = 0; pos < distance; ++pos) {
+	for (int pos = 0; pos < dist; ++pos) {
 		std::cout << "\033[1K"; // erase line
 		std::cout << "\033[G";	// move cursor to beginning
 
@@ -76,7 +78,7 @@ int main(int argc, char **argv)
 		std::cout << "\t\t\t" << v << "\t\t\t" << GRAVITY-v;
 
 		usleep(v * 10000);
-		v = velocityForm(v+pos, GRAVITY, distance);
+		v = velocityForm(v+pos, GRAVITY, dist);
 	}
 
 	return 0;
