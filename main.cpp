@@ -75,7 +75,6 @@ int main(int argc, char **argv)
 		std::cout << "\033[1K"; // erase line
 		std::cout << "\033[G";	// move cursor to beginning
 		std::cout << '*';
-		std::cout << "\t\t\t" << v << "\t\t\t" << GRAVITY-v;
 
 		usleep(v * 10000);
 		v = velocityForm(v+pos, GRAVITY, dist);
