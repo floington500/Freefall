@@ -3,8 +3,22 @@
 #include <thread>
 #include <cmath>
 #include <string>
+#include <vector>
 
 const double GRAVITY = 9.8;
+
+/**
+ * Calculates the acceleration which drives
+ * the velocity for the rock.
+ * 
+ * @param d 
+ * @param t 
+ */
+inline
+double accelerationForm(double d, double t)
+{
+	return (d * 2) / std::pow(t, 2);
+}
 
 /**
  * Calculates the velocity of the rock.
@@ -44,14 +58,15 @@ void setup()
 // 	- accleration rows
 int main(int argc, char **argv)
 {
-	if (argv[1] == "--help")
+	if (strcmp(argv[1], "--help") == 0)
 	{
 		std::cout << "Usage: freefall <distance> <time>" << std::endl;
 		return 0;
 	}
 	setup();
 	int dist = std::stoi(argv[1]);
-	double time = std::stoi(argv[2]);
+	double time = std::stod(argv[2]);
+	double acl = accelerationForm(dist, time);
 		
 	// print the column
 	printColumn(dist);
@@ -61,23 +76,31 @@ int main(int argc, char **argv)
 	sleep(1);
 
 	// calculate initial velocity
-	double v = velocityForm(0, GRAVITY, dist);
+	double v = velocityForm(0, acl, dist);
+	std::vector<double> vv {v};
 
-	// increases loop at interval of one
-	for (int pos = 0; pos < dist; ++pos) {
+	// precompute velocity values 
+	for (int i = 0; i < dist - 1; ++i) {
+		v = velocityForm(v, acl, dist);
+		vv.push_back(v);
+	} 
+
+	// iterate backwards to simulate acceleration
+	for (auto it = vv.rbegin(); it != vv.rend(); it++) {
 		std::cout << "\033[1K"; // erase line
 		std::cout << "\033[G";	// move cursor to beginning
 
-		// replace line with pound sign
+		// add pound sign to beginning 
 		std::cout << '#';
+		std::cout << "\t\t" << *it;
 
-		std::cout << "\033[1B";
+		std::cout << "\033[1B"; // move cursor down
 		std::cout << "\033[1K"; // erase line
 		std::cout << "\033[G";	// move cursor to beginning
 		std::cout << '*';
+		std::cout << "\t\t\t" << v << "\t\t\t" << GRAVITY-v;
 
-		usleep(v * 10000);
-		v = velocityForm(v+pos, GRAVITY, dist);
+		usleep(static_cast<int>(*it * 5000));
 	}
 
 	return 0;

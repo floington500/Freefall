@@ -6,4 +6,4 @@ if ! g++ main.cpp; then
 fi
 
 # run program
-./a.out 30 30 
+./a.out 15 15 
