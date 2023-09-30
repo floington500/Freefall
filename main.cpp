@@ -5,18 +5,7 @@
 #include <stdlib.h>
 #include <string>
 
-/**
- * Calculates the acceleration which will set the
- * rock in motion.
- *
- * @param d distance
- * @param t time
- */
-inline double accelerationForm(double d, double t)
-{
-	return d/t;
-	//return (d * 2) / std::pow(t, 2);
-}
+const double GRAVITY = 9.8;
 
 /**
  * Calculates the velocity of the rock.
@@ -66,13 +55,11 @@ int main(int argc, char **argv)
 	}
 	int distance = std::stoi(argv[1]);
 	double time = std::stoi(argv[2]);
-	double originalTime = time;
-	double acl = 9.8;
 	setup(distance);
 	sleep(1);
 
 	// calculate initial velocity
-	double v = velocityForm(0, acl, distance);
+	double v = velocityForm(0, GRAVITY, distance);
 
 	// increases loop at interval of one
 	for (int pos = 0; pos < distance; ++pos) {
@@ -81,15 +68,15 @@ int main(int argc, char **argv)
 
 		// replace line with pound sign
 		std::cout << '#';
-		std::cout << "\t\t\t" << v;
 
 		std::cout << "\033[1B";
 		std::cout << "\033[1K"; // erase line
 		std::cout << "\033[G";	// move cursor to beginning
 		std::cout << '*';
+		std::cout << "\t\t\t" << v << "\t\t\t" << GRAVITY-v;
 
 		usleep(v * 10000);
-		v = velocityForm(v+pos, acl, distance);
+		v = velocityForm(v+pos, GRAVITY, distance);
 	}
 
 	return 0;
