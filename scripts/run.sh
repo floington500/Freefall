@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 if ! ./scripts/build.sh; then
-	echo error in building process 
+	echo "error in building process"
 	exit 1
 fi
 
