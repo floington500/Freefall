@@ -6,6 +6,8 @@
 
 #include "math.h"
 
+constexpr double GRAVITY = 9.8;
+
 void printColumn(int n)
 {
 	std::cout << "*\n"; // start column with rock at top
@@ -16,7 +18,7 @@ void printColumn(int n)
 }
 
 /**
- * Prepares the terminal enviornment for the simulation.
+ * Prepares the terminal emulator for the simulation.
  */
 void setup()
 {
@@ -37,42 +39,20 @@ int main(int argc, char **argv)
 		return 0;
 	}
 	setup();
-	int dist = std::stoi(argv[1]);
-	double time = std::stod(argv[2]);
-	double acl = accelerationForm(dist, time);
-		
-	double v = velocityForm(0, acl, dist); // calculate initial velocity
-	auto vv = new std::vector<double>{}; // vector for velocity vals
 
-	// precompute velocity
-	for (int i = 0; i < dist - 1; ++i) {
-		v = velocityForm(v, acl, dist);
-		vv->push_back(v);
-	} 
-
-	std::vector<double> vt;
+	int d = std::stoi(argv[1]);
+	auto vt = computeTime(d, 
+		computeVelocity(GRAVITY, d)
+	);
 	
-	// precompute time 
-	double prev = vv->at(0);
-	double sum = 0;
-	for (int i = 0; i < dist - 1; ++i) {
-		std::cout << "Iteration: " << i << "\tInitial velocity: " << prev << "\tFinal Velocity: " << vv->at(i);
-		double t = timeForm(i, prev, vv->at(i));
-		sum += t;
-		vt.push_back(t);
-		prev = vv->at(i);
-		std::cout << "\tResulting time: " <<  t << std::endl;
+	for (int i = 0; i < vt.size(); i++) {
+		std::cout << "Value at index " << i << ":" << vt.at(i) << "\n";
 	}
 
-	delete vv;
-	std::cout << "Is sum and time equal?\tTime: " << time << "\tSum: " << sum << std::endl;
+	getchar();
 
-	getchar();	
-	
-	system("clear");				   // clear the console
-
-	// print the column
-	printColumn(dist);
+	// print the column for the rock to drop from
+	printColumn(d);
 	// move cursor to starting point
 	std::cout << "\033[0;0H";
 	sleep(1);
