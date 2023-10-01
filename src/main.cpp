@@ -1,8 +1,6 @@
 #include <bits/stdc++.h>
 #include <iomanip>
-#include <thread>
 #include <string>
-#include <vector>
 
 #include "math.h"
 
@@ -10,7 +8,6 @@ constexpr double GRAVITY = 9.8;
 
 void printColumn(int n)
 {
-	std::cout << "*\n"; // start column with rock at top
 	for (int i = 0; i < n; ++i)
 	{
 		std::cout << "#\n";
@@ -44,10 +41,6 @@ int main(int argc, char **argv)
 	auto vt = computeTime(d, 
 		computeVelocity(GRAVITY, d)
 	);
-	
-	// for (int i = 0; i < vt.size(); i++) {
-	// 	std::cout << "Value at index " << i << ":" << vt.at(i) << "\n";
-	// }
 
 	// print the column for the rock to drop from
 	printColumn(d);
@@ -55,19 +48,23 @@ int main(int argc, char **argv)
 	std::cout << "\033[0;0H";
 	sleep(1);
 
+	int i = 1;
 	for (auto t = vt.rbegin(); t != vt.rend(); ++t) {
 		std::cout << "\033[1K"; // erase line
-		std::cout << "\033[G";	// move cursor to beginning
+		std::cout << "\033[G";	// move cursor to beginning	
+		std::cout << "*";
 	
-		// add pound sign to beginning 
-		std::cout << '#';
-
-		std::cout << "\033[1B"; // move cursor down
-		std::cout << "\033[1K"; // erase line
-		std::cout << "\033[G";	// move cursor to beginning
-		std::cout << '*';
-
 		usleep(*t * 1000000);
+
+		if (i < vt.size()) {
+			std::cout << "\033[1K"; // erase line
+			std::cout << "\033[G";	// move cursor to beginning	
+			std::cout << "#";
+			i++;
+		}
+		
+		std::cout << "\033[1B"; // move cursor down
 	}
+
 	return 0;
 }
