@@ -22,7 +22,7 @@ void printColumn(int n)
  */
 void setup()
 {
-	system("clear");				   // clear the console
+	system("clear"); // clear the console
 	std::cout.setf(std::ios::unitbuf); // turn off stdout buffer
 	std::cout.sync_with_stdio(false);
 	std::cout << "\033[?25l"; // disable cursor blinking
@@ -45,11 +45,9 @@ int main(int argc, char **argv)
 		computeVelocity(GRAVITY, d)
 	);
 	
-	for (int i = 0; i < vt.size(); i++) {
-		std::cout << "Value at index " << i << ":" << vt.at(i) << "\n";
-	}
-
-	getchar();
+	// for (int i = 0; i < vt.size(); i++) {
+	// 	std::cout << "Value at index " << i << ":" << vt.at(i) << "\n";
+	// }
 
 	// print the column for the rock to drop from
 	printColumn(d);
@@ -69,7 +67,7 @@ int main(int argc, char **argv)
 		std::cout << "\033[G";	// move cursor to beginning
 		std::cout << '*';
 
-		sleep(*t);
+		usleep(*t * 1000000);
 	}
 	return 0;
 }
