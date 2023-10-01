@@ -116,9 +116,10 @@ int main(int argc, char **argv)
 	}
 
 	delete vv;
-	std::cout << "Is sum and time equal?\tTime: " << time << "\tSum:" << sum << std::endl;
+	std::cout << "Is sum and time equal?\tTime: " << time << "\tSum: " << sum << std::endl;
 
 	getchar();	
+	
 	system("clear");				   // clear the console
 
 	// print the column
@@ -130,10 +131,7 @@ int main(int argc, char **argv)
 	for (auto t = vt.rbegin(); t != vt.rend(); ++t) {
 		std::cout << "\033[1K"; // erase line
 		std::cout << "\033[G";	// move cursor to beginning
-
-		std::chrono::duration<double> dur (*t);	
-		auto nanoseconds = std::chrono::duration_cast<std::chrono::nanoseconds>(dur);
-
+	
 		// add pound sign to beginning 
 		std::cout << '#';
 
@@ -142,9 +140,7 @@ int main(int argc, char **argv)
 		std::cout << "\033[G";	// move cursor to beginning
 		std::cout << '*';
 
-
-		std::this_thread::sleep_for(std::chrono::nanoseconds(nanoseconds));
+		sleep(*t);
 	}
-
 	return 0;
 }
