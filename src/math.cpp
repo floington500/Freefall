@@ -58,16 +58,16 @@ double timeForm(double d, double Vi, double Vf)
  * @param d
  * @return std::vector<double>
  */
-std::vector<double> *computeVelocity(double a, double d)
+std::vector<double> computeVelocity(double a, double d)
 {
-	double v = velocityForm(0, a, d);
+	double v = velocityForm(0, a, d); // calculate initial velocity
 
-	auto vv = new std::vector<double>{}; // vector for velocity vals
+	std::vector<double> vv; // vector for velocity vals
 
 	// calculate velocity values
 	for (int i = 0; i < d; ++i)
 	{
-  vv->push_back(v);
+  		vv.push_back(v);
 		v = velocityForm(v, a, d);
 	}
 
@@ -82,19 +82,17 @@ std::vector<double> *computeVelocity(double a, double d)
  * @param vv 
  * @return std::vector<double> 
  */
-std::vector<double> computeTime(double d, std::vector<double> *vv)
+std::vector<double> computeTime(double d, std::vector<double> vv)
 {
-
-
 	std::vector<double> vt;
-	double prev = vv->at(0);
-	for (int i = 1; i < vv->size(); ++i)
+
+	double prev = vv.at(0);
+	for (int i = 1; i < vv.size(); ++i)
 	{
-		double t = timeForm(i, prev, vv->at(i));
+		double t = timeForm(i, prev, vv.at(i));
 		vt.push_back(t);
-		prev = vv->at(i);
+		prev = vv.at(i);
 	} 
 
-	delete vv;
 	return vt;
 }
