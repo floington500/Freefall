@@ -11,6 +11,6 @@ double timeForm(double, double, double);
 
 std::vector<double> computeVelocity(double, double);
 
-std::vector<double> computeTime(double, std::vector<double>*);
+std::vector<double> computeTime(double, std::vector<double>);
 
 #endif // MATH_H
