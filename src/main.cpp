@@ -10,7 +10,7 @@ void printColumn(int n)
 {
 	for (int i = 0; i < n; ++i)
 	{
-		std::cout << "#\n";
+		std::cout << "# \n";
 	}
 }
 
@@ -32,7 +32,7 @@ int main(int argc, char **argv)
 {
 	if (strcmp(argv[1], "--help") == 0)
 	{
-		std::cout << "Usage: freefall <distance> <time>" << std::endl;
+		std::cout << "Usage: freefall <distance>" << std::endl;
 		return 0;
 	}
 	setup();
@@ -44,29 +44,16 @@ int main(int argc, char **argv)
 
 	// print the column for the rock to drop from
 	printColumn(d);
-	// move cursor to starting point
-	std::cout << "\033[0;0H";
-	sleep(1);
+	std::cout << "\033[0;2H"; // move cursor to [0][2]
 
-	int i = 1;
 	for (auto t = vt.rbegin(); t != vt.rend(); ++t) {
-		std::cout << "\033[1K"; // erase line
-		std::cout << "\033[G";	// move cursor to beginning	
 		std::cout << "*";
 	
 		usleep(*t * 1000000);
 
-		if (i < vt.size()) {
-			std::cout << "\033[1K"; // erase line
-			std::cout << "\033[G";	// move cursor to beginning	
-			std::cout << "#";
-			i++;
-		}
-		
-		std::cout << "\033[1B"; // move cursor down
+		std::cout << "\b";
+		std::cout << "\033[B";
 	}
-
-	sleep(1);
 
 	return 0;
 }

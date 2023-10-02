@@ -87,7 +87,7 @@ std::vector<double> computeTime(double d, std::vector<double> vv)
 	std::vector<double> vt;
 
 	double prev = vv.at(0);
-	for (int i = 1; i < vv.size(); ++i)
+	for (int i = 0; i < vv.size(); ++i)
 	{
 		double t = timeForm(i, prev, vv.at(i));
 		vt.push_back(t);
