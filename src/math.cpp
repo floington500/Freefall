@@ -44,7 +44,7 @@ std::vector<double> computeVelocity(double a, double d)
 	for (int i = 0; i < d; ++i)
 	{
   		vv.push_back(v);
-		v = velocityForm(v, a, d);
+		v = velocityForm(v, a, i);
 	}
 
 	return vv;
