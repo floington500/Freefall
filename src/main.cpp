@@ -5,13 +5,14 @@
 #include "math.h"
 
 constexpr double GRAVITY = 9.8;
+const int DELAY = 1000000;
 
 /**
- * Prepares the terminal emulator for the simulation.
+ * @brief prepares the terminal emulator for the simulation
  */
 void setup()
 {
-	system("clear"); // clear the console
+	system("clear");				   // clear the console
 	std::cout.setf(std::ios::unitbuf); // turn off stdout buffer
 	std::cout.sync_with_stdio(false);
 	std::cout << "\033[?25l"; // disable cursor blinking
@@ -19,8 +20,8 @@ void setup()
 }
 
 // usage:
-// 	- '--help'
-// 	- accleration rows
+// 	- --help
+// 	- rows
 int main(int argc, char **argv)
 {
 	if (strcmp(argv[1], "--help") == 0)
@@ -28,21 +29,23 @@ int main(int argc, char **argv)
 		std::cout << "Usage: freefall <distance>" << std::endl;
 		return 0;
 	}
-	setup();
 
 	int d = std::stoi(argv[1]);
-	auto vt = computeTime(d, 
-		computeVelocity(GRAVITY, d)
-	);
+	auto vt = computeTime(d,
+						  computeVelocity(GRAVITY, d));
 
-	for (auto t = vt.rbegin(); t != vt.rend(); ++t) {
+	setup();
+	for (auto t = vt.rbegin(); t != vt.rend(); ++t)
+	{
 		std::cout << "*";
-	
-		usleep(*t * 1000000);
 
-		std::cout << "\b \b"; // erase rock
+		usleep(*t * DELAY);
+
+		std::cout << "\b \b";  // erase rock
 		std::cout << "\033[B"; // move cursor down
 	}
 
+	std::cout << "*";
+	
 	return 0;
 }
