@@ -1,11 +1,20 @@
+/**
+ * @file main.cpp
+ * @author Zach Appella
+ * @brief Main file which contains the source code
+ * for the freefall animation.
+ * @version 0.1
+ * @date 2023-10-06
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
 #include <bits/stdc++.h>
 #include <iomanip>
 #include <string>
 
 #include "math.h"
-
-constexpr double GRAVITY = 9.8;
-const int DELAY = 700000;
+#include "constants.h"
 
 /**
  * @brief prepares the terminal emulator for the simulation
@@ -31,7 +40,7 @@ int main(int argc, char **argv)
 
 	int d = std::stoi(argv[1]);
 	auto vt = computeTime(d,
-						  computeVelocity(GRAVITY, d));
+						  computeVelocity(constants::GRAVITY, d));
 
 	setup();
 
@@ -50,7 +59,7 @@ int main(int argc, char **argv)
 	{
 		std::cout << "*";
 
-		usleep(*t * DELAY);
+		usleep(*t * constants::DELAY);
 
 		std::cout << "\b \b";  // erase rock
 		std::cout << "\033[B"; // move cursor down
