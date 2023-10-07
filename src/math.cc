@@ -12,9 +12,6 @@
  * You may obtain a copy of the License at:
  * https://creativecommons.org/licenses/by/1.0/
  */
-#include <cmath>
-#include <vector>
-
 #include "math.h"
 
 using namespace math;
