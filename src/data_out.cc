@@ -21,7 +21,7 @@ int main(int argc, char** argv)
 {
     if (argv[1] == "--help")
 	{
-		std::cout << "Usage: freefall <distance>" << std::endl;
+		std::cout << "Usage: data_out <distance> <outfile>" << std::endl;
 		return 0;
 	}  
    

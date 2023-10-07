@@ -4,6 +4,9 @@
 This is a text simulation of [freefall](https://en.wikipedia.org/wiki/Free_fall) I made as a mini project using formulas I learned from physics class in school.
 
 
+## Installation
+
+
 ## Usage
 
 
@@ -57,7 +60,4 @@ So for example, on the first occasion the rock falls, the output will be delayed
 ## Demonstrations
 
 
-Here are a few demonstrations of the freefall animation displayed by the program:
-
-
-- ![](images/demo.mkv)
+Here are a few examples of the freefall animation displayed by the program:
