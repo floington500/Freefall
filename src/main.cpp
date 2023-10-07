@@ -5,7 +5,7 @@
 #include "math.h"
 
 constexpr double GRAVITY = 9.8;
-const int DELAY = 1000000;
+const int DELAY = 700000;
 
 /**
  * @brief prepares the terminal emulator for the simulation
@@ -16,7 +16,6 @@ void setup()
 	std::cout.setf(std::ios::unitbuf); // turn off stdout buffer
 	std::cout.sync_with_stdio(false);
 	std::cout << "\033[?25l"; // disable cursor blinking
-	std::cout << "\033[0;1H"; // move cursor to [0][1]
 }
 
 // usage:
@@ -35,6 +34,18 @@ int main(int argc, char **argv)
 						  computeVelocity(GRAVITY, d));
 
 	setup();
+
+	// print the column
+	std::cout << "\033[0;2H"; // move cursor to position to print column
+	for (int i = 0; i < d; ++i)
+	{
+		std::cout << "#";
+		std::cout << "\033[B"; // move cursor down
+		std::cout << "\b";	   // backspace
+	}
+
+	// play the animation
+	std::cout << "\033[0;1H"; // move cursor to starting position
 	for (auto t = vt.rbegin(); t != vt.rend(); ++t)
 	{
 		std::cout << "*";
@@ -45,7 +56,7 @@ int main(int argc, char **argv)
 		std::cout << "\033[B"; // move cursor down
 	}
 
-	std::cout << "*";
-	
+	std::cout << "*"; // make rock stay at bottom of screen
+
 	return 0;
 }
