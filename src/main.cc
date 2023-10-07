@@ -19,6 +19,9 @@
 #include "math.h"
 #include "constants.h"
 
+using namespace math;
+using namespace constants;
+
 /**
  * @brief prepares the terminal emulator for the simulation
  */
@@ -43,7 +46,7 @@ int main(int argc, char **argv)
 
 	int d = std::stoi(argv[1]);
 	auto vt = computeTime(d,
-						  computeVelocity(constants::GRAVITY, d));
+						  computeVelocity(GRAVITY, d));
 
 	setup();
 
@@ -62,7 +65,7 @@ int main(int argc, char **argv)
 	{
 		std::cout << "*";
 
-		usleep(*t * constants::DELAY);
+		usleep(*t * DELAY);
 
 		std::cout << "\b \b";  // erase rock
 		std::cout << "\033[B"; // move cursor down

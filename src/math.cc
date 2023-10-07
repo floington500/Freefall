@@ -15,30 +15,9 @@
 #include <cmath>
 #include <vector>
 
-/**
- * @brief computes the velocity of the rock
- *  *
- * @param Iv initial velocity
- * @param a  acceleration
- * @param s  the distance
- */
-double velocityForm(double Iv, double a, double s)
-{
-	return std::sqrt(std::pow(Iv, 2) + 2 * a * s);
-}
+#include "math.h"
 
-/**
- * @brief computes the time between two differences
- * in velocity
- * 
- * @param d  distance
- * @param Vi initial velocity
- * @param Vf final velocity
- */
-double timeForm(double d, double Vi, double Vf)
-{
-	return d * 2 / (Vi + Vf);
-}
+using namespace math;
 
 /**
  * @brief assumes initial velocity of zero and solves for
@@ -48,7 +27,7 @@ double timeForm(double d, double Vi, double Vf)
  * @param d distance
  * @return std::vector<double>
  */
-std::vector<double> computeVelocity(double a, double d)
+std::vector<double> math::computeVelocity(double a, double d)
 {
 	double v = velocityForm(0, a, d); // calculate initial velocity
 
@@ -72,7 +51,7 @@ std::vector<double> computeVelocity(double a, double d)
  * @param vv 
  * @return std::vector<double> 
  */
-std::vector<double> computeTime(double d, std::vector<double> vv)
+std::vector<double> math::computeTime(double d, std::vector<double> vv)
 {
 	std::vector<double> vt;
 

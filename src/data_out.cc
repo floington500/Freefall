@@ -19,6 +19,9 @@
 #include "math.h"
 #include "constants.h"
 
+using namespace math;
+using namespace constants;
+
 // usage:
 // - distance
 // - outfile
@@ -32,7 +35,7 @@ int main(int argc, char** argv)
    
     int d = std::stoi(argv[1]);
 	auto vt = computeTime(d,
-						  computeVelocity(constants::GRAVITY, d));
+						  computeVelocity(GRAVITY, d));
     
     std::ofstream out("out/" + std::string(argv[2]));
     for (int i = 0; i < vt.size(); ++i) {
