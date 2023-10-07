@@ -16,13 +16,6 @@ Using this program yourself is pretty simple (if you have experience with the co
 The number being passed in as a program argument is the height you want the object to be dropped from. 
 
 
-
-## Demonstration
-
-
-
-
-
 ## How It Works
 
 
@@ -47,3 +40,24 @@ After all the computations are done, we can move onto the programming aspect and
 
 The code in main demonstrates this whole process pretty simply, so if you are a programmer looking for an easier explanation you can go there.
 
+### Data Visualization
+
+
+Here is a simple visualization of the time values that are output by the formulas in my program(see: [data_out](src/data_out.cc)): 
+
+
+- ![](images/data.png) 
+
+
+As a reminder, the animation uses these values in reverse to delay the program for each time the rock falls. This was already covered [here](https://github.com/floington500/Freefall/blob/master/README.md?plain=1#L35) so no need for me to explain it again.
+
+So for example, on the first occasion the rock falls, the output will be delayed for 0.314039 seconds before going onto the next iteration.
+
+
+## Demonstrations
+
+
+Here are a few demonstrations of the freefall animation displayed by the program:
+
+
+- ![](images/demo.mkv)
