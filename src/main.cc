@@ -51,7 +51,7 @@ int main(int argc, char **argv)
 	setup();
 
 	// print the column
-	std::cout << "\033[0;2H"; // move cursor to position to print column
+	std::cout << "\033[0;2H"; // move cursor to [2][0] to print column
 	for (int i = 0; i < d; ++i)
 	{
 		std::cout << "#";
@@ -59,7 +59,6 @@ int main(int argc, char **argv)
 		std::cout << "\b";	   // backspace
 	}
 
-	// play the animation
 	std::cout << "\033[0;1H"; // move cursor to starting position
 	for (auto t = vt.rbegin(); t != vt.rend(); ++t)
 	{
