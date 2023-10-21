@@ -73,11 +73,11 @@ So for example, on the first occasion of the rock falling, the output will be de
 I know what you are thinking, all this talk and nothing to be shown for it yet, well this is the moment you have most likely been waiting for. Here are a few examples of the freefall animation displayed by the program: 
 
 <video width="320" height="360" controls>
-  <source src="images/demo1.mp4" type="video/mp4">
+  <source src="https://github.com/floington500/Freefall/blob/master/images/demo1.mp4" type="video/mp4">
 </video>
 
 <video width="320" height="360" controls>
-  <source src="images/demo2.mp4" type="video/mp4">
+  <source src="https://github.com/floington500/Freefall/blob/master/images/demo2.mp4" type="video/mp4">
 </video>
 
 
