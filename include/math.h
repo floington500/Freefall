@@ -45,7 +45,7 @@ namespace math
         return d * 2 / (Vi + Vf);
     }
 
-    std::vector<double> computeVelocity(double, double);
+    std::vector<double> computeVelocity(double);
 
     std::vector<double> computeTime(double, std::vector<double>);
 

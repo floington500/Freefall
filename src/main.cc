@@ -5,9 +5,9 @@
  * for the freefall animation.
  * @version 0.1
  * @date 2023-10-06
- * 
+ *
  * @copyright Copyright (c) 2023 Zach Appella
- * 
+ *
  * Licensed under the Creative Commons Attribution 1.0 Generic License.
  * You may obtain a copy of the License at:
  * https://creativecommons.org/licenses/by/1.0/
@@ -19,11 +19,8 @@
 #include "math.h"
 #include "constants.h"
 
-using namespace math;
-using namespace constants;
-
 /**
- * @brief prepares the terminal emulator for the simulation
+ * @brief prepares the terminal emulator for the simulation.
  */
 void setup()
 {
@@ -33,24 +30,9 @@ void setup()
 	std::cout << "\033[?25l"; // disable cursor blinking
 }
 
-// usage:
-// 	- --help
-// 	- rows
-int main(int argc, char **argv)
+void animate(int d, std::vector<double> &vt)
 {
-	if (strcmp(argv[1], "--help") == 0)
-	{
-		std::cout << "Usage: freefall <distance>" << std::endl;
-		return 0;
-	}
-
-	int d = std::stoi(argv[1]);
-	auto vt = computeTime(d,
-						  computeVelocity(GRAVITY, d));
-
-	setup();
-
-	// print the column
+	// print the comparison column
 	std::cout << "\033[0;2H"; // move cursor to [2][0] to print column
 	for (int i = 0; i < d; ++i)
 	{
@@ -64,13 +46,31 @@ int main(int argc, char **argv)
 	{
 		std::cout << "*";
 
-		usleep(*t * DELAY);
+		usleep(*t * constants::DELAY);
 
 		std::cout << "\b \b";  // erase rock
 		std::cout << "\033[B"; // move cursor down
 	}
 
-	std::cout << "*"; // make rock stay at bottom of screen
+	std::cout << "*"; // footer to make rock stay at bottom of screen
+}
+
+// usage:
+// 	- --help
+// 	- rows
+int main(int argc, char **argv)
+{
+	if (strcmp(argv[1], "--help") == 0)
+	{
+		std::cout << "Usage: freefall <distance>" << std::endl;
+		return 0;
+	}
+
+	int distance = std::stoi(argv[1]);
+	auto time = math::computeTime(distance, math::computeVelocity(distance));
+
+	setup();
+	animate(distance, time);
 
 	return 0;
 }

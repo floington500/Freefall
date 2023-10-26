@@ -13,6 +13,7 @@
  * https://creativecommons.org/licenses/by/1.0/
  */
 #include "math.h"
+#include "constants.h"
 
 using namespace math;
 
@@ -24,9 +25,9 @@ using namespace math;
  * @param d distance
  * @return std::vector<double>
  */
-std::vector<double> math::computeVelocity(double a, double d)
+std::vector<double> math::computeVelocity(double d)
 {
-	double v = velocityForm(0, a, d); // calculate initial velocity
+	double v = velocityForm(0, constants::GRAVITY, d); // calculate initial velocity
 
 	std::vector<double> vv; // vector for velocity vals
 
@@ -34,7 +35,7 @@ std::vector<double> math::computeVelocity(double a, double d)
 	for (int i = 0; i < d; ++i)
 	{
   		vv.push_back(v);
-		v = velocityForm(v, a, i);
+		v = velocityForm(v, constants::GRAVITY, i);
 	}
 
 	return vv;
